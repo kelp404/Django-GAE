@@ -79,7 +79,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
-    BASE_DIR + '/application/templates/'
+    BASE_DIR + '/application/templates_django/'
 )
 
 TEMPLATE_LOADERS = (

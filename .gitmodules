@@ -1,0 +1,4 @@
+[submodule "submodules/ui-router"]
+	path = submodules/ui-router
+	url = https://github.com/angular-ui/ui-router.git
+	ignore = dirty

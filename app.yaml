@@ -29,12 +29,15 @@ handlers:
 - url: /favicon\.ico
   static_files: application/static/icons/favicon.ico
   upload: application/static/icons/favicon\.ico
-# JavaScript
-- url: /static/javascript/
-  static_dir: application/static/javascript
 # CSS
 - url: /static/css/
   static_dir: application/static/css
+# JavaScript
+- url: /static/javascript/
+  static_dir: application/static/javascript
+# Angular Templates
+- url: /views/
+  static_dir: application/templates_angular
 
 - url: .*
   script: application.app
