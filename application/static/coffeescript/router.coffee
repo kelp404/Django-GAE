@@ -16,7 +16,7 @@ angular.module 'app.router', ['app.provider', 'app.controller', 'ui.router']
         url: '/'
         resolve:
             posts: ['$app', ($app) ->
-                $app.getPosts()
+                $app.store.getPosts()
             ]
         views:
             content:

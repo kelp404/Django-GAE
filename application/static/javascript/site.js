@@ -22,26 +22,57 @@
       $injector = injector;
       return $http = $injector.get('$http');
     };
-    this.getPosts = (function(_this) {
-      return function(index, size) {
-        if (index == null) {
-          index = 0;
+    this.store = {
+      getPosts: (function(_this) {
+        return function(index, size) {
+          if (index == null) {
+            index = 0;
+          }
+          if (size == null) {
+            size = 20;
+          }
+          return $http({
+            method: 'get',
+            url: '/'
+          });
+        };
+      })(this)
+    };
+    this.popMessage = {
+      error: function(status) {
+
+        /*
+        pop error message.
+         */
+        switch (status) {
+          case 400:
+            return $.av.pop({
+              title: 'Input Failed',
+              message: 'Please check input values.',
+              template: 'error'
+            });
+          case 403:
+            return $.av.pop({
+              title: 'Permission denied',
+              message: 'Please check your permission.',
+              template: 'error'
+            });
+          default:
+            return $.av.pop({
+              title: 'Error',
+              message: 'Loading failed, please try again later.',
+              template: 'error'
+            });
         }
-        if (size == null) {
-          size = 20;
-        }
-        return $http({
-          method: 'get',
-          url: '/'
-        });
-      };
-    })(this);
+      }
+    };
     this.$get = [
       '$injector', (function(_this) {
         return function($injector) {
           _this.setupProviders($injector);
           return {
-            getPosts: _this.getPosts
+            store: _this.store,
+            popMessage: _this.popMessage
           };
         };
       })(this)
@@ -60,7 +91,7 @@
         resolve: {
           posts: [
             '$app', function($app) {
-              return $app.getPosts();
+              return $app.store.getPosts();
             }
           ]
         },
