@@ -30,13 +30,13 @@ handlers:
   static_files: application/static/icon/favicon.ico
   upload: application/static/icon/favicon\.ico
 # images
-- url: /static/image/
+- url: /image/
   static_dir: application/static/image
 # CSS
-- url: /static/css/
+- url: /css/
   static_dir: application/static/css
 # JavaScript
-- url: /static/javascript/
+- url: /javascript/
   static_dir: application/static/javascript
 # Angular Templates
 - url: /views/

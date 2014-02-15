@@ -1,4 +1,5 @@
-#Django on Google App Engine  [![devDependency Status](https://david-dm.org/kelp404/Django-GAE/dev-status.png?branch=master)](https://david-dm.org/kelp404/Django-GAE#info=devDependencies)
+#Django on Google App Engine
+[![devDependency Status](https://david-dm.org/kelp404/Django-GAE/dev-status.png?branch=master)](https://david-dm.org/kelp404/Django-GAE#info=devDependencies)  
 
 [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
