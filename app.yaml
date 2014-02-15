@@ -32,6 +32,9 @@ handlers:
 # JavaScript
 - url: /static/javascript/
   static_dir: application/static/javascript
+# CSS
+- url: /static/css/
+  static_dir: application/static/css
 
 - url: .*
   script: application.app
