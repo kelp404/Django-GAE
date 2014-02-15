@@ -27,8 +27,11 @@ skip_files:
 
 handlers:
 - url: /favicon\.ico
-  static_files: application/static/icons/favicon.ico
-  upload: application/static/icons/favicon\.ico
+  static_files: application/static/icon/favicon.ico
+  upload: application/static/icon/favicon\.ico
+# images
+- url: /static/image/
+  static_dir: application/static/image
 # CSS
 - url: /static/css/
   static_dir: application/static/css

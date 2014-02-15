@@ -4,6 +4,8 @@
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <title>Django-GAE</title>
+        <meta http-equiv="cache-control" content="no-cache">
+        <meta http-equiv="expires" content="0">
         <link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
         <link type="text/css" rel="stylesheet" href="/static/css/alert_view.css"/>
         <link type="text/css" rel="stylesheet" href="/static/css/site.css"/>
@@ -16,11 +18,17 @@
         <script type="text/javascript" src="/static/javascript/site.js"></script>
     </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div ui-view="content"></div>
-            <div ui-view></div>
+    {% include './shared/navigation.html' %}
+
+    <div ui-view></div>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div ui-view="content" class="col-xs-12 col-sm-12"></div>
+            </div>
         </div>
     </div>
+
+    {% include './shared/footer.html' %}
 </body>
 </html>
