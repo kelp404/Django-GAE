@@ -11,10 +11,12 @@ skip_files:
 - ^(.*/)?.*\.py[co]
 - ^(.*/)?\..*
 - ^(.*/)?tests/.*
-- ^README.md
+- ^README\.md
 - ^\.gitignore
 - ^\.gitmodules
 - ^\.git/.*
+- ^package\.json
+- ^\node_modules/.*
 - ^\.idea/.*
 - ^_images/.*
 - ^(.*/)?.*\.coffee
@@ -25,8 +27,11 @@ skip_files:
 
 handlers:
 - url: /favicon\.ico
-  static_files: favicon.ico
-  upload: favicon\.ico
+  static_files: application/static/icons/favicon.ico
+  upload: application/static/icons/favicon\.ico
+# JavaScript
+- url: /static/javascript/
+  static_dir: application/static/javascript
 
 - url: .*
   script: application.app

@@ -1,0 +1,33 @@
+{
+  "name": "Django-GAE",
+  "version": "0.0.0",
+  "description": "The Django site on Google App Engine.",
+  "homepage": "https://github.com/kelp404/Django-GAE",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kelp404/Django-GAE.git"
+  },
+  "keywords": [
+    "Django",
+    "Google App Engine"
+  ],
+  "author": {
+    "name": "Kelp",
+    "url": "https://github.com/kelp404"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/kelp404/Django-GAE/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-coffee": "~0.10.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-compass": "~0.7.2"
+  }
+}

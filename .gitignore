@@ -4,6 +4,9 @@
 # PyCharm
 .idea
 
+# node modules
+node_modules
+
 # osx noise
 .DS_Store
 
