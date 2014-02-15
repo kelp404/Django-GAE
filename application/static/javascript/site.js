@@ -52,7 +52,8 @@
 
 (function() {
   angular.module('app.router', ['app.provider', 'app.controller', 'ui.router']).config([
-    '$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    '$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+      $locationProvider.html5Mode(true);
       $urlRouterProvider.otherwise('/');
       return $stateProvider.state('index', {
         url: '/',

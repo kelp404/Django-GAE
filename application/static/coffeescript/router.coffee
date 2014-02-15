@@ -1,6 +1,12 @@
 angular.module 'app.router', ['app.provider', 'app.controller', 'ui.router']
 
-.config ['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) ->
+.config ['$stateProvider', '$urlRouterProvider', '$locationProvider',
+($stateProvider, $urlRouterProvider, $locationProvider) ->
+
+    # html5 mode
+    $locationProvider.html5Mode yes
+
+    # redirect other urls
     $urlRouterProvider.otherwise '/'
 
     # ----------------------------------------
