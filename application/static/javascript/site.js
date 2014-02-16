@@ -1,10 +1,25 @@
 (function() {
-  angular.module('app.controller', []).controller('PostsController', ['$scope', 'posts', function($scope, posts) {}]);
+  angular.module('app.controller', []).controller('NavigationController', [
+    '$scope', '$injector', function($scope, $injector) {
+      var $app;
+      $app = $injector.get('$app');
+      return $scope.user = $app.user;
+    }
+  ]).controller('PostsController', ['$scope', 'posts', function($scope, posts) {}]);
 
 }).call(this);
 
 (function() {
-  angular.module('app', ['app.router']);
+  angular.module('app.directive', ['app.controller']).directive('appNavigation', function() {
+    return {
+      controller: 'NavigationController'
+    };
+  });
+
+}).call(this);
+
+(function() {
+  angular.module('app', ['app.router', 'app.directive']);
 
 }).call(this);
 
@@ -22,7 +37,22 @@
       $injector = injector;
       return $http = $injector.get('$http');
     };
+
+    /*
+    is_login: yes / no
+    id: 0
+    permission: 0: anonymous, 1: root, 2: normal
+    name: 'Guest'
+    email: 'user@email.com'
+    login_url: 'url'
+    logout_url: 'url'
+     */
+    this.user = window.user;
     this.store = {
+
+      /*
+      The data sotre provider.
+       */
       getPosts: (function(_this) {
         return function(index, size) {
           if (index == null) {
@@ -71,6 +101,7 @@
         return function($injector) {
           _this.setupProviders($injector);
           return {
+            user: _this.user,
             store: _this.store,
             popMessage: _this.popMessage
           };

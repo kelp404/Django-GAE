@@ -23,7 +23,21 @@ angular.module 'app.provider', []
     # -------------------------------------------------------------
     # public methods
     # -------------------------------------------------------------
+    ###
+    is_login: yes / no
+    id: 0
+    permission: 0: anonymous, 1: root, 2: normal
+    name: 'Guest'
+    email: 'user@email.com'
+    login_url: 'url'
+    logout_url: 'url'
+    ###
+    @user = window.user
+
     @store =
+        ###
+        The data sotre provider.
+        ###
         getPosts: (index=0, size=20) =>
             $http
                 method: 'get'
@@ -60,6 +74,7 @@ angular.module 'app.provider', []
         @setupProviders $injector
 
         # result object
+        user: @user
         store: @store
         popMessage: @popMessage
     ]

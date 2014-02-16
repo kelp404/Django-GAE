@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav app-navigation class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6">
@@ -16,7 +16,10 @@
                 <li><a href="#">Link</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Sign in</a></li>
+                {% verbatim %}
+                <li ng-if="!user.is_login"><a href="{{user.login_url}}" target="_self">Sign in</a></li>
+                <li ng-if="user.is_login"><a href="{{user.logout_url}}" target="_self">Sign out</a></li>
+                {% endverbatim %}
             </ul>
         </div>
     </div>
