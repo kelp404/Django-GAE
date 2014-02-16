@@ -1,10 +1,19 @@
-from django.shortcuts import render_to_response
-from django.http import HttpResponseNotFound
+from django.template import loader, RequestContext, Context
+from django.http import HttpResponseNotFound, HttpResponseServerError
 
 
 def page_not_found(request):
+    template = loader.get_template('error/default.html')
     model = {
         'status': 404,
-        'exception': 'Page Not Found',
+        'exception': '%s Not Found' % request.path,
     }
-    return HttpResponseNotFound(render_to_response('error/default.html', model))
+    return HttpResponseNotFound(template.render(RequestContext(request, model)))
+
+def server_error(request):
+    template = loader.get_template('error/default.html')
+    model = {
+        'status': 500,
+        'exception': ''
+    }
+    return HttpResponseServerError(template.render(Context(model)))
