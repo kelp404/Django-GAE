@@ -1,14 +1,11 @@
 from google.appengine.ext import db
+from application.models.dto.user_model import UserPermission
 
-
-class UserPermission(object):
-    root = 0
-    normal = 1
 
 class UserModel(db.Model):
     email = db.EmailProperty()
     name = db.StringProperty(indexed=False)
-    permission = db.IntegerProperty(default=UserPermission.normal)   # 0 root    1 normal user
+    permission = db.IntegerProperty(default=UserPermission.normal)
     create_time = db.DateTimeProperty(auto_now_add=True)
 
     def dict(self):
