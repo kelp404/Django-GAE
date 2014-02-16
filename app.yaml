@@ -29,6 +29,9 @@ handlers:
 - url: /favicon\.ico
   static_files: application/static/icon/favicon.ico
   upload: application/static/icon/favicon\.ico
+# font
+- url: /font/
+  static_dir: application/static/font
 # images
 - url: /image/
   static_dir: application/static/image

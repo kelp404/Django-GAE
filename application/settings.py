@@ -21,10 +21,9 @@ SECRET_KEY = 'f!!w414jfulmwu862^f4#@9*4cwo#9pg$omys)wqo2*!0()3b-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'django-kelp.appspot.com']
 
 
 # Application definition
@@ -49,7 +48,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'application.urls'
 
-WSGI_APPLICATION = 'DjangoGAE.wsgi.application'
+WSGI_APPLICATION = 'application.app'
 
 
 # Database
