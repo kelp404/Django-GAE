@@ -4,6 +4,7 @@ from application.views.error import *
 
 
 # error handlers
+handler403 = permission_denied
 handler404 = page_not_found
 handler405 = method_not_allowed
 handler500 = server_error
