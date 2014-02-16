@@ -12,7 +12,7 @@ handler500 = server_error
 # methods
 def dispatch(**dispatches):
     def wraps(request, *args, **kwargs):
-        handler = dispatches.get(request.method, lambda x: handler405(request))
+        handler = dispatches.get(request.method, handler405)
         return handler(request, *args, **kwargs)
     return wraps
 

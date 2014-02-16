@@ -14,7 +14,7 @@ def method_not_allowed(request):
     template = loader.get_template('error/default.html')
     model = {
         'status': 405,
-        'exception': '%s Not Allowed' % ''
+        'exception': '%s Not Allowed' % request.method
     }
     return http.HttpResponse(status=405, content=template.render(RequestContext(request, model)))
 
