@@ -6,4 +6,4 @@ def is_debug():
     Is debug mode?
     :return: True / False
     """
-    return getattr(settings, "DEBUG", None)
+    return getattr(settings, "DEBUG", True)
