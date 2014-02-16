@@ -1,5 +1,5 @@
 from django.template import loader, RequestContext, Context
-from django.http import HttpResponseNotFound, HttpResponseServerError
+from django import http
 
 
 def page_not_found(request):
@@ -8,7 +8,15 @@ def page_not_found(request):
         'status': 404,
         'exception': '%s Not Found' % request.path,
     }
-    return HttpResponseNotFound(template.render(RequestContext(request, model)))
+    return http.HttpResponseNotFound(template.render(RequestContext(request, model)))
+
+def method_not_allowed(request):
+    template = loader.get_template('error/default.html')
+    model = {
+        'status': 405,
+        'exception': '%s Not Allowed' % ''
+    }
+    return http.HttpResponse(status=405, content=template.render(RequestContext(request, model)))
 
 def server_error(request):
     template = loader.get_template('error/default.html')
@@ -16,4 +24,4 @@ def server_error(request):
         'status': 500,
         'exception': ''
     }
-    return HttpResponseServerError(template.render(Context(model)))
+    return http.HttpResponseServerError(template.render(Context(model)))
