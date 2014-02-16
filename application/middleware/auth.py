@@ -1,4 +1,4 @@
-from application.services.account_service import AccountService
+from application.services.account import AccountService
 
 
 class AuthenticationMiddleware(object):

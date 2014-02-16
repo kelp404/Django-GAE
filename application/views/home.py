@@ -1,4 +1,4 @@
-from application.decorators.auth_decorator import *
+from application.decorators.auth import *
 from django.template.response import TemplateResponse
 
 
