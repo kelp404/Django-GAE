@@ -20,7 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'f!!w414jfulmwu862^f4#@9*4cwo#9pg$omys)wqo2*!0()3b-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Auto-set debug mode based on App Engine dev environ
+DEBUG = 'SERVER_SOFTWARE' in os.environ and os.environ['SERVER_SOFTWARE'].startswith('Dev')
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['localhost', 'django-kelp.appspot.com']
