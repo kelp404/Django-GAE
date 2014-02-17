@@ -1,5 +1,6 @@
 from application.models.datastore.post_model import *
 from application.models.datastore.user_model import *
+from application.models.dto.page_list import *
 
 
 class PostService(object):
@@ -8,9 +9,11 @@ class PostService(object):
         Get posts.
         :param index: {int} The page index.
         :param size: {int} The page size.
-        :return: [PostModel]
+        :return: PageList(PostModel)
         """
-        return PostModel().all().order('create_time').fetch(size, index * size)
+        posts = PostModel().all().order('create_time').fetch(size, index * size)
+        total = PostModel().all().count()
+        return PageList(index, size, total, posts)
 
     def add_post(self, user_id, title, content):
         """
