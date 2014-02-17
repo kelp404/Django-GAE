@@ -56,14 +56,26 @@ angular.module 'app.provider', []
             hideCreate: =>
                 $rootScope.$broadcast @broadcastChannel.hideCreatePost
 
+    @http = (model) =>
+        $http model
+        .error (data, status) =>
+            @popMessage.error status
+
     @store =
         ###
         The data sotre provider.
         ###
         getPosts: (index=0, size=20) =>
-            $http
+            @http
                 method: 'get'
                 url: '/'
+        createPost: (title, content) =>
+            @http
+                method: 'post'
+                url: '/posts'
+                data:
+                    title: title
+                    content: content
 
     @popMessage =
         error: (status) ->
@@ -99,6 +111,7 @@ angular.module 'app.provider', []
         broadcastChannel: @broadcastChannel
         user: @user
         modal: @modal
+        http: @http
         store: @store
         popMessage: @popMessage
     ]

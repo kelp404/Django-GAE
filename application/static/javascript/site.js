@@ -8,8 +8,9 @@
         $event.preventDefault();
         return $app.modal.post.showCreate({
           submitCallback: function(model) {
-            console.log(model);
-            return $app.modal.post.hideCreate();
+            return $app.store.createPost(model.title, model.content).success(function() {
+              return $app.modal.post.hideCreate();
+            });
           }
         });
       };
@@ -119,6 +120,13 @@
         })(this)
       }
     };
+    this.http = (function(_this) {
+      return function(model) {
+        return $http(model).error(function(data, status) {
+          return _this.popMessage.error(status);
+        });
+      };
+    })(this);
     this.store = {
 
       /*
@@ -132,9 +140,21 @@
           if (size == null) {
             size = 20;
           }
-          return $http({
+          return _this.http({
             method: 'get',
             url: '/'
+          });
+        };
+      })(this),
+      createPost: (function(_this) {
+        return function(title, content) {
+          return _this.http({
+            method: 'post',
+            url: '/posts',
+            data: {
+              title: title,
+              content: content
+            }
           });
         };
       })(this)
@@ -175,6 +195,7 @@
             broadcastChannel: _this.broadcastChannel,
             user: _this.user,
             modal: _this.modal,
+            http: _this.http,
             store: _this.store,
             popMessage: _this.popMessage
           };

@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 from application.views.base import *
 from application.views.error import *
+from application.handlers.post import *
 
 
 # error handlers
@@ -21,4 +22,5 @@ def dispatch(**dispatches):
 # routers
 urlpatterns = patterns('',
     url(r'^$', dispatch(GET=base_view)),
+    url(r'^posts$', dispatch(POST=create_post)),
 )

@@ -9,8 +9,9 @@ angular.module 'app.controller', []
         $event.preventDefault()
         $app.modal.post.showCreate
             submitCallback: (model) ->
-                console.log model
-                $app.modal.post.hideCreate()
+                $app.store.createPost model.title, model.content
+                .success ->
+                    $app.modal.post.hideCreate()
 ]
 
 .controller 'PostsController', ['$scope', 'posts', ($scope, posts) ->
