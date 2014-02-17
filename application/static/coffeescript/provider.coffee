@@ -6,6 +6,7 @@ angular.module 'app.provider', []
     # -------------------------------------------------------------
     $injector = null
     $http = null
+    $rootScope = null
 
 
     # -------------------------------------------------------------
@@ -18,11 +19,16 @@ angular.module 'app.provider', []
         ###
         $injector = injector
         $http = $injector.get '$http'
+        $rootScope = $injector.get '$rootScope'
 
 
     # -------------------------------------------------------------
     # public methods
     # -------------------------------------------------------------
+    @broadcastChannel =
+        showCreatePost: '$showCreatePost'
+        hideCreatePost: '$hideCreatePost'
+
     ###
     is_login: yes / no
     id: 0
@@ -33,6 +39,22 @@ angular.module 'app.provider', []
     logout_url: 'url'
     ###
     @user = window.user
+
+    @modal =
+        post:
+            ###
+            Modals about post functions.
+            ###
+            showCreate: (object={}) =>
+                ###
+                @params object:
+                    title: ''
+                    content: ''
+                    submitCallback: ({title: '', content: ''})->
+                ###
+                $rootScope.$broadcast @broadcastChannel.showCreatePost, object
+            hideCreate: =>
+                $rootScope.$broadcast @broadcastChannel.hideCreatePost
 
     @store =
         ###
@@ -74,7 +96,9 @@ angular.module 'app.provider', []
         @setupProviders $injector
 
         # result object
+        broadcastChannel: @broadcastChannel
         user: @user
+        modal: @modal
         store: @store
         popMessage: @popMessage
     ]

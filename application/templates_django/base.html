@@ -22,6 +22,12 @@
         var user = {{ user|json }};
     </script>
 <body>
+    <div class="container">
+        <div class="row">
+            {% include './shared/modal.html' %}
+        </div>
+    </div>
+
     {% include './shared/navigation.html' %}
 
     <div ui-view></div>

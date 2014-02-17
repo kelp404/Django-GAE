@@ -10,13 +10,9 @@
             <a class="navbar-brand" href="/">Django on GAE</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% verbatim %}
+                <li><a ng-click="showCreatePostModal($event)" href="#">New post</a></li>
                 <li ng-if="!user.is_login"><a href="{{user.login_url}}" target="_self">Sign in</a></li>
                 <li ng-if="user.is_login"><a href="{{user.logout_url}}" target="_self">Sign out</a></li>
                 {% endverbatim %}
