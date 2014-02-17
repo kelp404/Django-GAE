@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from application.views.home import *
+from application.views.base import *
 from application.views.error import *
 
 
@@ -20,5 +20,5 @@ def dispatch(**dispatches):
 
 # routers
 urlpatterns = patterns('',
-    url(r'^$', dispatch(GET=home_view)),
+    url(r'^$', dispatch(GET=base_view)),
 )
