@@ -68,8 +68,13 @@ angular.module 'app.provider', []
         getPosts: (index=0, size=20) =>
             @http
                 method: 'get'
-                url: '/'
-        createPost: (title, content) =>
+                url: '/posts'
+                params:
+                    index: index
+                    size: size
+            .then (data) ->
+                data.data
+        addPost: (title, content) =>
             @http
                 method: 'post'
                 url: '/posts'

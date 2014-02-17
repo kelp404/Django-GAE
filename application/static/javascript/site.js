@@ -8,14 +8,18 @@
         $event.preventDefault();
         return $app.modal.post.showCreate({
           submitCallback: function(model) {
-            return $app.store.createPost(model.title, model.content).success(function() {
+            return $app.store.addPost(model.title, model.content).success(function() {
               return $app.modal.post.hideCreate();
             });
           }
         });
       };
     }
-  ]).controller('PostsController', ['$scope', 'posts', function($scope, posts) {}]);
+  ]).controller('PostsController', [
+    '$scope', 'posts', function($scope, posts) {
+      return $scope.posts = posts;
+    }
+  ]);
 
 }).call(this);
 
@@ -142,11 +146,17 @@
           }
           return _this.http({
             method: 'get',
-            url: '/'
+            url: '/posts',
+            params: {
+              index: index,
+              size: size
+            }
+          }).then(function(data) {
+            return data.data;
           });
         };
       })(this),
-      createPost: (function(_this) {
+      addPost: (function(_this) {
         return function(title, content) {
           return _this.http({
             method: 'post',

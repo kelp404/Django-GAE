@@ -9,11 +9,10 @@ class UserModel(db.Model):
     create_time = db.DateTimeProperty(auto_now_add=True)
 
     def dict(self):
-        result = {
+        return {
             'id': self.key().id(),
             'name': self.name,
             'email': self.email,
-            'level': self.permission,
+            'permission': self.permission,
             'create_time': self.create_time.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
         }
-        return result

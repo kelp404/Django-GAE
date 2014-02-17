@@ -22,5 +22,5 @@ def dispatch(**dispatches):
 # routers
 urlpatterns = patterns('',
     url(r'^$', dispatch(GET=base_view)),
-    url(r'^posts$', dispatch(POST=create_post)),
+    url(r'^posts$', dispatch(GET=get_posts, POST=add_post)),
 )

@@ -1,3 +1,5 @@
-<div>
-    <h2>posts</h2>
+<div ng-repeat="post in posts">
+    <h3>{{ post.title }}</h3>
+    <h5>{{ post.content }}</h5>
+    <p>{{ post.create_time }}</p>
 </div>
