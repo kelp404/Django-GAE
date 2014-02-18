@@ -8,6 +8,11 @@ angular.module 'app.controller', []
     $scope.user = $app.user
     $scope.showCreatePostModal = ($event) ->
         $event.preventDefault()
+
+        if not $app.user.is_login
+            $app.modal.loginRequired.show()
+            return
+
         $app.modal.post.showCreate
             submitCallback: (model) ->
                 $app.store.addPost model.title, model.content

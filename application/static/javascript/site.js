@@ -7,6 +7,10 @@
       $scope.user = $app.user;
       return $scope.showCreatePostModal = function($event) {
         $event.preventDefault();
+        if (!$app.user.is_login) {
+          $app.modal.loginRequired.show();
+          return;
+        }
         return $app.modal.post.showCreate({
           submitCallback: function(model) {
             return $app.store.addPost(model.title, model.content).success(function() {
@@ -36,6 +40,9 @@
     '$injector', function($injector) {
       return {
         scope: true,
+        restrict: 'E',
+        replace: true,
+        templateUrl: '/views/modal/post.html',
         link: function(scope, element) {
           var $app;
           $app = $injector.get('$app');
@@ -56,6 +63,26 @@
           });
           return $(element).on('shown.bs.modal', function() {
             return $(element).find('input:first').select();
+          });
+        }
+      };
+    }
+  ]).directive('appModalLoginRequired', [
+    '$injector', function($injector) {
+      return {
+        scope: true,
+        restrict: 'E',
+        replace: true,
+        templateUrl: '/views/modal/login_required.html',
+        link: function(scope, element) {
+          var $app;
+          $app = $injector.get('$app');
+          scope.user = $app.user;
+          scope.$on($app.broadcastChannel.showLoginRequired, function() {
+            return $(element).modal('show');
+          });
+          return $(element).on('shown.bs.modal', function() {
+            return $(element).find('.focus').focus();
           });
         }
       };
@@ -119,7 +146,8 @@
     };
     this.broadcastChannel = {
       showCreatePost: '$showCreatePost',
-      hideCreatePost: '$hideCreatePost'
+      hideCreatePost: '$hideCreatePost',
+      showLoginRequired: '$showLoginRequired'
     };
 
     /*
@@ -156,6 +184,13 @@
         hideCreate: (function(_this) {
           return function() {
             return $rootScope.$broadcast(_this.broadcastChannel.hideCreatePost);
+          };
+        })(this)
+      },
+      loginRequired: {
+        show: (function(_this) {
+          return function() {
+            return $rootScope.$broadcast(_this.broadcastChannel.showLoginRequired);
           };
         })(this)
       }

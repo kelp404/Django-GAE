@@ -28,6 +28,7 @@ angular.module 'app.provider', []
     @broadcastChannel =
         showCreatePost: '$showCreatePost'
         hideCreatePost: '$hideCreatePost'
+        showLoginRequired: '$showLoginRequired'
 
     ###
     is_login: yes / no
@@ -55,6 +56,9 @@ angular.module 'app.provider', []
                 $rootScope.$broadcast @broadcastChannel.showCreatePost, object
             hideCreate: =>
                 $rootScope.$broadcast @broadcastChannel.hideCreatePost
+        loginRequired:
+            show: =>
+                $rootScope.$broadcast @broadcastChannel.showLoginRequired
 
     @http = (model) =>
         $http model

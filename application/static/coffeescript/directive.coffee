@@ -3,8 +3,14 @@ angular.module 'app.directive', ['app.controller']
 .directive 'appNavigation', ->
     controller: 'NavigationController'
 
+# -------------------------------------------------------------
+# bootstrap modal
+# -------------------------------------------------------------
 .directive 'appModalPost', ['$injector', ($injector) ->
     scope: yes
+    restrict: 'E'
+    replace: yes
+    templateUrl: '/views/modal/post.html'
     link: (scope, element) ->
         # providers
         $app = $injector.get '$app'
@@ -27,6 +33,31 @@ angular.module 'app.directive', ['app.controller']
             $(element).find('input:first').select()
 ]
 
+.directive 'appModalLoginRequired', ['$injector', ($injector) ->
+    scope: yes
+    restrict: 'E'
+    replace: yes
+    templateUrl: '/views/modal/login_required.html'
+    link: (scope, element) ->
+        # providers
+        $app = $injector.get '$app'
+
+        # scope
+        scope.user = $app.user
+
+        # listen
+        scope.$on $app.broadcastChannel.showLoginRequired, ->
+            $(element).modal 'show'
+
+        # element events
+        $(element).on 'shown.bs.modal', ->
+            $(element).find('.focus').focus()
+]
+
+
+# -------------------------------------------------------------
+# pager
+# -------------------------------------------------------------
 .directive 'appPager', ->
     scope:
         pageList: '=appPager'
