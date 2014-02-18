@@ -30,7 +30,7 @@ class PageList(list):
     @property
     def max_index(self):
         max = self.__total / float(self.__size)
-        return int(max) if max <= int(max) else int(max) + 1
+        return int(max) if max > int(max) else int(max) - 1
 
     def dict(self):
         return {

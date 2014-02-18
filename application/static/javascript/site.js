@@ -56,7 +56,39 @@
         }
       };
     }
-  ]);
+  ]).directive('appPager', function() {
+    return {
+      scope: {
+        pageList: '=appPager',
+        urlTemplate: '@pagerUrlTemplate'
+      },
+      template: "<ul class=\"pagination\">\n    <li ng-class=\"{disabled: !links.previous.enable}\">\n        <a ng-href=\"{{ links.previous.url }}\">&laquo;</a>\n    </li>\n\n    <li ng-repeat='item in links.numbers'\n        ng-if='item.show'\n        ng-class='{active: item.isCurrent}'>\n        <a ng-href=\"{{ item.url }}\">{{ item.pageNumber }}</a>\n    </li>\n\n    <li ng-class=\"{disabled: !links.next.enable}\">\n        <a ng-href=\"{{ links.next.url }}\">&raquo;</a>\n    </li>\n</ul>",
+      link: function(scope) {
+        var index, _i, _ref, _ref1, _results;
+        scope.links = {
+          previous: {
+            enable: scope.pageList.has_previous_page,
+            url: scope.urlTemplate.replace('#{index}', scope.pageList.index - 1)
+          },
+          numbers: [],
+          next: {
+            enable: scope.pageList.has_next_page,
+            url: scope.urlTemplate.replace('#{index}', scope.pageList.index + 1)
+          }
+        };
+        _results = [];
+        for (index = _i = _ref = scope.pageList.index - 3, _ref1 = scope.pageList.index + 3; _i <= _ref1; index = _i += 1) {
+          _results.push(scope.links.numbers.push({
+            show: index === scope.pageList.index || index >= 0 && index <= scope.pageList.max_index,
+            isCurrent: index === scope.pageList.index,
+            pageNumber: index + 1,
+            url: scope.urlTemplate.replace('#{index}', index)
+          }));
+        }
+        return _results;
+      }
+    };
+  });
 
 }).call(this);
 
@@ -137,19 +169,15 @@
       The data sotre provider.
        */
       getPosts: (function(_this) {
-        return function(index, size) {
+        return function(index) {
           if (index == null) {
             index = 0;
-          }
-          if (size == null) {
-            size = 20;
           }
           return _this.http({
             method: 'get',
             url: '/posts',
             params: {
-              index: index,
-              size: size
+              index: index
             }
           }).then(function(data) {
             return data.data;
@@ -221,12 +249,28 @@
     '$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
       $locationProvider.html5Mode(true);
       $urlRouterProvider.otherwise('/');
-      return $stateProvider.state('index', {
+      $stateProvider.state('index', {
         url: '/',
         resolve: {
           posts: [
             '$app', function($app) {
               return $app.store.getPosts();
+            }
+          ]
+        },
+        views: {
+          content: {
+            templateUrl: '/views/content/posts.html',
+            controller: 'PostsController'
+          }
+        }
+      });
+      return $stateProvider.state('posts', {
+        url: '/posts?index',
+        resolve: {
+          posts: [
+            '$app', '$stateParams', function($app, $stateParams) {
+              return $app.store.getPosts($stateParams.index);
             }
           ]
         },

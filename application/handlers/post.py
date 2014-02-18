@@ -16,7 +16,7 @@ def get_posts(request):
     ps = PostService()
     posts = ps.get_posts(
         index=int(model.get('index', '0')),
-        size=int(model.get('size', '20'))
+        size=int(model.get('size', '10'))
     )
     return JsonResponse(posts)
 

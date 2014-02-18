@@ -17,10 +17,18 @@ def dispatch(**dispatches):
         handler = dispatches.get(request.method, handler405)
         return handler(request, *args, **kwargs)
     return wraps
+def api_dispatch(**dispatches):
+    def wraps(request, *args, **kwargs):
+        if 'application/json' not in request.META['HTTP_ACCEPT'].split(','):
+            # return base view for first loading
+            return base_view(request)
+        handler = dispatches.get(request.method, handler405)
+        return handler(request, *args, **kwargs)
+    return wraps
 
 
 # routers
 urlpatterns = patterns('',
     url(r'^$', dispatch(GET=base_view)),
-    url(r'^posts$', dispatch(GET=get_posts, POST=add_post)),
+    url(r'^posts$', api_dispatch(GET=get_posts, POST=add_post)),
 )

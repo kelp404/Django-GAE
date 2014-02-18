@@ -65,13 +65,12 @@ angular.module 'app.provider', []
         ###
         The data sotre provider.
         ###
-        getPosts: (index=0, size=20) =>
+        getPosts: (index=0) =>
             @http
                 method: 'get'
                 url: '/posts'
                 params:
                     index: index
-                    size: size
             .then (data) ->
                 data.data
         addPost: (title, content) =>

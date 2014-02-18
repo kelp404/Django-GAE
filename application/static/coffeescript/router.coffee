@@ -22,4 +22,18 @@ angular.module 'app.router', ['app.provider', 'app.controller', 'ui.router']
             content:
                 templateUrl: '/views/content/posts.html'
                 controller: 'PostsController'
+
+    # ----------------------------------------
+    # posts
+    # ----------------------------------------
+    $stateProvider.state 'posts',
+        url: '/posts?index'
+        resolve:
+            posts: ['$app', '$stateParams', ($app, $stateParams) ->
+                $app.store.getPosts($stateParams.index)
+            ]
+        views:
+            content:
+                templateUrl: '/views/content/posts.html'
+                controller: 'PostsController'
 ]
