@@ -1,1 +1,1 @@
-angular.module 'app', ['app.router', 'app.directive']
+angular.module 'app', ['app.router', 'app.directive', 'app.validations']

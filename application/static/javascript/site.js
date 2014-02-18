@@ -1,9 +1,10 @@
 (function() {
   angular.module('app.controller', []).controller('NavigationController', [
     '$scope', '$injector', function($scope, $injector) {
-      var $app, $state;
+      var $app, $state, $validator;
       $app = $injector.get('$app');
       $state = $injector.get('$state');
+      $validator = $injector.get('$validator');
       $scope.user = $app.user;
       return $scope.showCreatePostModal = function($event) {
         $event.preventDefault();
@@ -13,11 +14,13 @@
         }
         return $app.modal.post.showCreate({
           submitCallback: function(model) {
-            return $app.store.addPost(model.title, model.content).success(function() {
-              $state.go($state.$current, null, {
-                reload: true
+            return $validator.validate($scope).success(function() {
+              return $app.store.addPost(model.title, model.content).success(function() {
+                $state.go($state.$current, null, {
+                  reload: true
+                });
+                return $app.modal.post.hideCreate();
               });
-              return $app.modal.post.hideCreate();
             });
           }
         });
@@ -124,7 +127,7 @@
 }).call(this);
 
 (function() {
-  angular.module('app', ['app.router', 'app.directive']);
+  angular.module('app', ['app.router', 'app.directive', 'app.validations']);
 
 }).call(this);
 
@@ -336,6 +339,18 @@
       });
       return $rootScope.$on('$stateChangeError', function() {
         return NProgress.done();
+      });
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  angular.module('app.validations', ['validator']).config([
+    '$validatorProvider', function($validatorProvider) {
+      return $validatorProvider.register('required', {
+        validator: /.+/,
+        error: 'This field is required.'
       });
     }
   ]);

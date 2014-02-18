@@ -4,6 +4,7 @@ angular.module 'app.controller', []
     # providers
     $app = $injector.get '$app'
     $state = $injector.get '$state'
+    $validator = $injector.get '$validator'
 
     $scope.user = $app.user
     $scope.showCreatePostModal = ($event) ->
@@ -15,10 +16,12 @@ angular.module 'app.controller', []
 
         $app.modal.post.showCreate
             submitCallback: (model) ->
-                $app.store.addPost model.title, model.content
+                $validator.validate $scope
                 .success ->
-                    $state.go $state.$current, null, reload: yes
-                    $app.modal.post.hideCreate()
+                    $app.store.addPost model.title, model.content
+                    .success ->
+                        $state.go $state.$current, null, reload: yes
+                        $app.modal.post.hideCreate()
 ]
 
 .controller 'PostsController', ['$scope', 'posts', ($scope, posts) ->
