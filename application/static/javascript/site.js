@@ -66,7 +66,7 @@
         pageList: '=appPager',
         urlTemplate: '@pagerUrlTemplate'
       },
-      template: "<ul class=\"pagination\">\n    <li ng-class=\"{disabled: !links.previous.enable}\">\n        <a ng-href=\"{{ links.previous.url }}\">&laquo;</a>\n    </li>\n\n    <li ng-repeat='item in links.numbers'\n        ng-if='item.show'\n        ng-class='{active: item.isCurrent}'>\n        <a ng-href=\"{{ item.url }}\">{{ item.pageNumber }}</a>\n    </li>\n\n    <li ng-class=\"{disabled: !links.next.enable}\">\n        <a ng-href=\"{{ links.next.url }}\">&raquo;</a>\n    </li>\n</ul>",
+      template: "<ul ng-if=\"pageList.total > 0\" class=\"pagination\">\n    <li ng-class=\"{disabled: !links.previous.enable}\">\n        <a ng-href=\"{{ links.previous.url }}\">&laquo;</a>\n    </li>\n\n    <li ng-repeat='item in links.numbers'\n        ng-if='item.show'\n        ng-class='{active: item.isCurrent}'>\n        <a ng-href=\"{{ item.url }}\">{{ item.pageNumber }}</a>\n    </li>\n\n    <li ng-class=\"{disabled: !links.next.enable}\">\n        <a ng-href=\"{{ links.next.url }}\">&raquo;</a>\n    </li>\n</ul>",
       link: function(scope) {
         var index, _i, _ref, _ref1, _results;
         scope.links = {
@@ -83,7 +83,7 @@
         _results = [];
         for (index = _i = _ref = scope.pageList.index - 3, _ref1 = scope.pageList.index + 3; _i <= _ref1; index = _i += 1) {
           _results.push(scope.links.numbers.push({
-            show: index === scope.pageList.index || index >= 0 && index <= scope.pageList.max_index,
+            show: index >= 0 && index <= scope.pageList.max_index,
             isCurrent: index === scope.pageList.index,
             pageNumber: index + 1,
             url: scope.urlTemplate.replace('#{index}', index)

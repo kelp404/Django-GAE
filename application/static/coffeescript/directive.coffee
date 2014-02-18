@@ -33,7 +33,7 @@ angular.module 'app.directive', ['app.controller']
         urlTemplate: '@pagerUrlTemplate'
     template:
         """
-        <ul class="pagination">
+        <ul ng-if="pageList.total > 0" class="pagination">
             <li ng-class="{disabled: !links.previous.enable}">
                 <a ng-href="{{ links.previous.url }}">&laquo;</a>
             </li>
@@ -61,7 +61,7 @@ angular.module 'app.directive', ['app.controller']
 
         for index in [(scope.pageList.index - 3)..(scope.pageList.index + 3)] by 1
             scope.links.numbers.push
-                show: index is scope.pageList.index or index >= 0 and index <= scope.pageList.max_index
+                show: index >= 0 and index <= scope.pageList.max_index
                 isCurrent: index is scope.pageList.index
                 pageNumber: index + 1
                 url: scope.urlTemplate.replace '#{index}', index
