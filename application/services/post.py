@@ -11,7 +11,7 @@ class PostService(object):
         :param size: {int} The page size.
         :return: PageList(PostModel)
         """
-        posts = PostModel().all().order('create_time').fetch(size, index * size)
+        posts = PostModel().all().order('-create_time').fetch(size, index * size)
         total = PostModel().all().count()
         return PageList(index, size, total, posts)
 

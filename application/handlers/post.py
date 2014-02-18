@@ -18,8 +18,7 @@ def get_posts(request):
         index=int(model.get('index', '0')),
         size=int(model.get('size', '20'))
     )
-    result = [post.dict() for post in posts]
-    return JsonResponse(result)
+    return JsonResponse(posts)
 
 @authorization(UserPermission.normal, UserPermission.root)
 def add_post(request):

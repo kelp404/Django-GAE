@@ -31,3 +31,14 @@ class PageList(list):
     def max_index(self):
         max = self.__total / float(self.__size)
         return int(max) if max <= int(max) else int(max) + 1
+
+    def dict(self):
+        return {
+            'index': self.__index,
+            'size': self.__size,
+            'total': self.__total,
+            'has_next_page': self.has_next_page,
+            'has_previous_page': self.has_previous_page,
+            'max_index': self.max_index,
+            'items': [x.dict() for x in self]
+        }
