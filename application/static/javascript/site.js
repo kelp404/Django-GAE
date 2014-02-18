@@ -286,6 +286,23 @@
         }
       });
     }
+  ]).run([
+    '$injector', function($injector) {
+      var $rootScope;
+      $rootScope = $injector.get('$rootScope');
+      NProgress.configure({
+        showSpinner: false
+      });
+      $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState) {
+        return NProgress.start();
+      });
+      $rootScope.$on('$stateChangeSuccess', function() {
+        return NProgress.done();
+      });
+      return $rootScope.$on('$stateChangeError', function() {
+        return NProgress.done();
+      });
+    }
   ]);
 
 }).call(this);
