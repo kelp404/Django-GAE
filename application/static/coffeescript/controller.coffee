@@ -16,7 +16,7 @@ angular.module 'app.controller', []
 
         $app.modal.post.showCreate
             submitCallback: (model) ->
-                $validator.validate $scope
+                $validator.validate model.scope
                 .success ->
                     $app.store.addPost model.title, model.content
                     .success ->

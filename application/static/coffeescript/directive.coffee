@@ -14,6 +14,8 @@ angular.module 'app.directive', ['app.controller']
     link: (scope, element) ->
         # providers
         $app = $injector.get '$app'
+        $validator = $injector.get '$validator'
+        $timeout = $injector.get '$timeout'
 
         # listen
         scope.$on $app.broadcastChannel.showCreatePost, (self, object) ->
@@ -24,7 +26,9 @@ angular.module 'app.directive', ['app.controller']
                 object?.submitCallback
                     title: scope.title
                     content: scope.content
+                    scope: scope
             $(element).modal 'show'
+            $timeout -> $validator.reset scope
         scope.$on $app.broadcastChannel.hideCreatePost, ->
             $(element).modal 'hide'
 

@@ -14,7 +14,7 @@
         }
         return $app.modal.post.showCreate({
           submitCallback: function(model) {
-            return $validator.validate($scope).success(function() {
+            return $validator.validate(model.scope).success(function() {
               return $app.store.addPost(model.title, model.content).success(function() {
                 $state.go($state.$current, null, {
                   reload: true
@@ -47,8 +47,10 @@
         replace: true,
         templateUrl: '/views/modal/post.html',
         link: function(scope, element) {
-          var $app;
+          var $app, $timeout, $validator;
           $app = $injector.get('$app');
+          $validator = $injector.get('$validator');
+          $timeout = $injector.get('$timeout');
           scope.$on($app.broadcastChannel.showCreatePost, function(self, object) {
             scope.title = object.title;
             scope.content = object.content;
@@ -56,10 +58,14 @@
               $event.preventDefault();
               return object != null ? object.submitCallback({
                 title: scope.title,
-                content: scope.content
+                content: scope.content,
+                scope: scope
               }) : void 0;
             };
-            return $(element).modal('show');
+            $(element).modal('show');
+            return $timeout(function() {
+              return $validator.reset(scope);
+            });
           });
           scope.$on($app.broadcastChannel.hideCreatePost, function() {
             return $(element).modal('hide');
@@ -179,7 +185,7 @@
             @params object:
                 title: ''
                 content: ''
-                submitCallback: ({title: '', content: ''})->
+                submitCallback: ({title: '', content: '', scope: {}})->
              */
             return $rootScope.$broadcast(_this.broadcastChannel.showCreatePost, object);
           };

@@ -51,7 +51,7 @@ angular.module 'app.provider', []
                 @params object:
                     title: ''
                     content: ''
-                    submitCallback: ({title: '', content: ''})->
+                    submitCallback: ({title: '', content: '', scope: {}})->
                 ###
                 $rootScope.$broadcast @broadcastChannel.showCreatePost, object
             hideCreate: =>
