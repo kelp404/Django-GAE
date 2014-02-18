@@ -1,14 +1,18 @@
 (function() {
   angular.module('app.controller', []).controller('NavigationController', [
     '$scope', '$injector', function($scope, $injector) {
-      var $app;
+      var $app, $state;
       $app = $injector.get('$app');
+      $state = $injector.get('$state');
       $scope.user = $app.user;
       return $scope.showCreatePostModal = function($event) {
         $event.preventDefault();
         return $app.modal.post.showCreate({
           submitCallback: function(model) {
             return $app.store.addPost(model.title, model.content).success(function() {
+              $state.go($state.$current, null, {
+                reload: true
+              });
               return $app.modal.post.hideCreate();
             });
           }

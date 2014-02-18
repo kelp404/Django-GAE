@@ -30,11 +30,10 @@
 
     {% include './shared/navigation.html' %}
 
-    <div ui-view></div>
     <div class="content">
         <div class="container">
             <div class="row">
-                <div ui-view="content" class="col-xs-12 col-sm-12"></div>
+                <div ui-view="content" autoscroll="false" class="col-xs-12 col-sm-12"></div>
             </div>
         </div>
     </div>
