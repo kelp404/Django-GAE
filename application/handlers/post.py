@@ -1,4 +1,5 @@
 import json
+from django.http import HttpResponse
 from application.decorators import *
 from application.services.post import *
 from application.responses import JsonResponse
@@ -34,3 +35,15 @@ def add_post(request):
     ps = PostService()
     post = ps.add_post(request.user.id, model.get('title'), model.get('content'))
     return JsonResponse(post.dict())
+
+@authorization(UserPermission.normal, UserPermission.root)
+def delete_post(request, post_id):
+    """
+    Delete the post.
+    :param post_id: The post id.
+    """
+    post_id = long(post_id)
+
+    ps = PostService()
+    ps.delete_post(post_id)
+    return HttpResponse(status=200)

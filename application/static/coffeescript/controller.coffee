@@ -24,6 +24,17 @@ angular.module 'app.controller', []
                         $app.modal.post.hideCreate()
 ]
 
-.controller 'PostsController', ['$scope', 'posts', ($scope, posts) ->
+.controller 'PostsController', ['$scope', '$injector', 'posts', ($scope, $injector, posts) ->
+    # providers
+    $app = $injector.get '$app'
+    $state = $injector.get '$state'
+
+    # scope
     $scope.posts = posts
+    $scope.deletePost = ($event, id) ->
+        $event.preventDefault()
+        $app.store.deletePost id
+        .success ->
+            $state.go $state.$current, null, reload: yes
+            $app.modal.post.hideCreate()
 ]

@@ -31,4 +31,5 @@ def api_dispatch(**dispatches):
 urlpatterns = patterns('',
     url(r'^$', dispatch(GET=base_view)),
     url(r'^posts$', api_dispatch(GET=get_posts, POST=add_post)),
+    url(r'^posts/(?P<post_id>\d+)$', api_dispatch(DELETE=delete_post)),
 )

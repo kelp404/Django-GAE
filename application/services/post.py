@@ -1,6 +1,9 @@
+from django.core.exceptions import PermissionDenied
+from django.http import Http404
 from application.models.datastore.post_model import *
 from application.models.datastore.user_model import *
 from application.models.dto.page_list import *
+from application.middleware import g
 
 
 class PostService(object):
@@ -23,6 +26,9 @@ class PostService(object):
         :param content: The post content.
         :return: PostModel
         """
+        if g.request.user.permission is UserPermission.anonymous:
+            raise PermissionDenied()
+
         # fetch author
         user = UserModel().get_by_id(user_id)
 
@@ -33,3 +39,18 @@ class PostService(object):
         post.put()
         post.get(post.key())
         return post
+
+    def delete_post(self, post_id):
+        if g.request.user.permission is UserPermission.anonymous:
+            raise PermissionDenied()
+
+        post = PostModel().get_by_id(post_id)
+        if post is None:
+            raise Http404
+
+        if g.request.user.permission != UserPermission.root and\
+                        post.author.key().id() != g.request.user.id:
+            raise PermissionDenied()
+
+        post.delete()
+        post.get(post.key())

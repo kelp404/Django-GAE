@@ -27,8 +27,20 @@
       };
     }
   ]).controller('PostsController', [
-    '$scope', 'posts', function($scope, posts) {
-      return $scope.posts = posts;
+    '$scope', '$injector', 'posts', function($scope, $injector, posts) {
+      var $app, $state;
+      $app = $injector.get('$app');
+      $state = $injector.get('$state');
+      $scope.posts = posts;
+      return $scope.deletePost = function($event, id) {
+        $event.preventDefault();
+        return $app.store.deletePost(id).success(function() {
+          $state.go($state.$current, null, {
+            reload: true
+          });
+          return $app.modal.post.hideCreate();
+        });
+      };
     }
   ]);
 
@@ -221,6 +233,26 @@
           if (index == null) {
             index = 0;
           }
+
+          /*
+          Get paged posts.
+          @param index: The page index.
+          @return:
+              index: The page index.
+              size: The page size.
+              total: The total data.
+              has_next_page: Has next page?
+              has_previous_page: Has previous page?
+              max_index: The max page index.
+              items: [
+                  id: The post id.
+                  title: The post title.
+                  content: The post content.
+                  author: The author.
+                  create_time: The create time.
+                  deletable: Is this post coulde be deleted?
+              ]
+           */
           return _this.http({
             method: 'get',
             url: '/posts',
@@ -228,6 +260,18 @@
               index: index
             }
           }).then(function(data) {
+            var post, _i, _len, _ref;
+            _ref = data.data.items;
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              post = _ref[_i];
+              if (_this.user.permission === 1) {
+                post.deletable = true;
+              } else if (post.author.id === _this.user.id) {
+                post.deletable = true;
+              } else {
+                post.deletable = false;
+              }
+            }
             return data.data;
           });
         };
@@ -241,6 +285,14 @@
               title: title,
               content: content
             }
+          });
+        };
+      })(this),
+      deletePost: (function(_this) {
+        return function(id) {
+          return _this.http({
+            method: 'delete',
+            url: "/posts/" + id
           });
         };
       })(this)

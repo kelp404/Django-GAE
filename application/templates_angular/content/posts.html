@@ -6,6 +6,9 @@
     <div class="panel-body">
         <pre class="no-border">{{ post.content }}</pre>
         <span class="pull-right" style="color: gray;">
+            <span ng-if="post.deletable">
+                <a ng-click="deletePost($event, post.id)" href="#">Delete</a> |
+            </span>
             {{ post.author.name }} |
             {{ post.create_time|date:'yyyy-MM-dd HH:mm' }}
         </span>

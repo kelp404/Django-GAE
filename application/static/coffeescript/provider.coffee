@@ -70,12 +70,38 @@ angular.module 'app.provider', []
         The data sotre provider.
         ###
         getPosts: (index=0) =>
+            ###
+            Get paged posts.
+            @param index: The page index.
+            @return:
+                index: The page index.
+                size: The page size.
+                total: The total data.
+                has_next_page: Has next page?
+                has_previous_page: Has previous page?
+                max_index: The max page index.
+                items: [
+                    id: The post id.
+                    title: The post title.
+                    content: The post content.
+                    author: The author.
+                    create_time: The create time.
+                    deletable: Is this post coulde be deleted?
+                ]
+            ###
             @http
                 method: 'get'
                 url: '/posts'
                 params:
                     index: index
-            .then (data) ->
+            .then (data) =>
+                for post in data.data.items
+                    if @user.permission is 1 # I am root.
+                        post.deletable = yes
+                    else if post.author.id is @user.id # I am this post's author.
+                        post.deletable = yes
+                    else
+                        post.deletable = no
                 data.data
         addPost: (title, content) =>
             @http
@@ -84,6 +110,10 @@ angular.module 'app.provider', []
                 data:
                     title: title
                     content: content
+        deletePost: (id) =>
+            @http
+                method: 'delete'
+                url: "/posts/#{id}"
 
     @popMessage =
         error: (status) ->
