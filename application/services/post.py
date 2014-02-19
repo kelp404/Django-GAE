@@ -26,7 +26,7 @@ class PostService(object):
         :param content: The post content.
         :return: PostModel
         """
-        if g.request.user.permission is UserPermission.anonymous:
+        if not g.request.user.is_login:
             raise PermissionDenied()
 
         # fetch author
@@ -41,7 +41,11 @@ class PostService(object):
         return post
 
     def delete_post(self, post_id):
-        if g.request.user.permission is UserPermission.anonymous:
+        """
+        Delete the post.
+        :param post_id: The post id.
+        """
+        if not g.request.user.is_login:
             raise PermissionDenied()
 
         post = PostModel().get_by_id(post_id)
