@@ -62,10 +62,10 @@
                 scope: scope
               }) : void 0;
             };
-            $(element).modal('show');
-            return $timeout(function() {
+            $timeout(function() {
               return $validator.reset(scope);
             });
+            return $(element).modal('show');
           });
           scope.$on($app.broadcastChannel.hideCreatePost, function() {
             return $(element).modal('hide');

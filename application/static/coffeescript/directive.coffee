@@ -27,8 +27,8 @@ angular.module 'app.directive', ['app.controller']
                     title: scope.title
                     content: scope.content
                     scope: scope
-            $(element).modal 'show'
             $timeout -> $validator.reset scope
+            $(element).modal 'show'
         scope.$on $app.broadcastChannel.hideCreatePost, ->
             $(element).modal 'hide'
 
