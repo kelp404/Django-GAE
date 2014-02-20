@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from application.views.base import *
 from application.views.error import *
-from application.handlers.post import *
+from application.views.post import *
 
 
 # error handlers
