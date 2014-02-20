@@ -1,5 +1,4 @@
-from django.core.exceptions import PermissionDenied
-from django.http import Http404
+from application.exceptions import Http403, Http404
 from application.models.datastore.post_model import *
 from application.models.datastore.user_model import *
 from application.models.dto.page_list import *
@@ -27,7 +26,7 @@ class PostService(object):
         :return: PostModel
         """
         if not g.request.user.is_login:
-            raise PermissionDenied()
+            raise Http403
 
         # fetch author
         user = UserModel().get_by_id(user_id)
@@ -46,7 +45,7 @@ class PostService(object):
         :param post_id: The post id.
         """
         if not g.request.user.is_login:
-            raise PermissionDenied()
+            raise Http403
 
         post = PostModel().get_by_id(post_id)
         if post is None:
@@ -54,7 +53,7 @@ class PostService(object):
 
         if g.request.user.permission != UserPermission.root and\
                         post.author.key().id() != g.request.user.id:
-            raise PermissionDenied()
+            raise Http403
 
         post.delete()
         post.get(post.key())

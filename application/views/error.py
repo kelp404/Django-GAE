@@ -4,6 +4,15 @@ from django.template import loader, RequestContext, Context
 from django import http
 from application.models.view_model.error_model import *
 
+
+def bad_request(request):
+    template = loader.get_template('error/default.html')
+    model = ErrorViewModel(
+        status=400,
+        exception='Bad Request'
+    )
+    return http.HttpResponseBadRequest(template.render(RequestContext(request, model)))
+
 def permission_denied(request):
     template = loader.get_template('error/default.html')
     model = ErrorViewModel(

@@ -1,6 +1,7 @@
 import json
 from django.http import HttpResponse
 from application.decorators import *
+from application.exceptions import Http400
 from application.services.post import *
 from application.responses import JsonResponse
 
@@ -14,11 +15,13 @@ def get_posts(request):
     :return: JsonResponse([PostModel])
     """
     model = request.GET.dict()
+    try:
+        index = int(model.get('index', '0'))
+    except:
+        raise Http400
+
     ps = PostService()
-    posts = ps.get_posts(
-        index=int(model.get('index', '0')),
-        size=int(model.get('size', '10'))
-    )
+    posts = ps.get_posts(index, 10)
     return JsonResponse(posts)
 
 @authorization(UserPermission.normal, UserPermission.root)
