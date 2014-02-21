@@ -1,7 +1,16 @@
-language: python
+language: node_js
 python:
   - "2.7"
+node_js:
+  - "0.10"
+
 install:
   - pip install -q Django==1.5 --use-mirrors
+
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - npm install -g grunt-cli
+
 script:
   - python test.py
