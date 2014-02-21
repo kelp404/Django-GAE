@@ -4,4 +4,4 @@ python:
 install:
   - pip install -q Django==1.5 --use-mirrors
 script:
-  - python tests.py
+  - python test.py
