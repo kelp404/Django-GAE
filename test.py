@@ -1,8 +1,17 @@
 import os, sys, unittest
 
 
-gae_path = '/usr/local/google_appengine'
+if os.path.isdir('./google_appengine'):
+    gae_path = './google_appengine'
+else:
+    gae_path = '/usr/local/google_appengine'
+
 sys.path.append(gae_path)
+libs = [
+    os.path.join(gae_path, 'google'),
+    os.path.join(gae_path, 'lib', 'yaml', 'lib'),
+]
+sys.path.extend(libs)
 
 
 if __name__ == '__main__':
