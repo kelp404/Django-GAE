@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from application.decorators import *
 from application.exceptions import Http400
 from application.services.post import *
-from application.responses import JsonResponse
+from application.models.responses import JsonResponse
 
 
 def get_posts(request):
