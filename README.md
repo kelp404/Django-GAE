@@ -26,7 +26,7 @@ $ grunt test
 ####Python
 >
 ```bash
-$ python tests.py
+$ python test.py
 ```
 
 
