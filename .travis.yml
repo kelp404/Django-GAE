@@ -8,6 +8,11 @@ node_js:
   - 0.10
 
 install:
+  # google app engine
+  - curl -O https://googleappengine.googlecode.com/files/google_appengine_1.8.9.zip
+  - unzip -q google_appengine_1.8.9.zip
+  - mv google_appengine/google ./google
+  # django
   - pip install -q Django==1.5 --use-mirrors
 
 before_script:
