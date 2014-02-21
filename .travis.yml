@@ -17,5 +17,5 @@ before_script:
   - npm install -g grunt-cli
 
 script:
-  - python test.py
+  - python tests.py
   - grunt test

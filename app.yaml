@@ -11,7 +11,9 @@ skip_files:
 - ^(.*/)?.*\.py[co]
 - ^(.*/)?\..*
 - ^(.*/)?tests/.*
-- ^test\.py
+- ^(.*/)?tests_coffee/.*
+- ^(.*/)?tests_python/.*
+- ^tests\.py
 - ^README\.md
 - ^\.gitignore
 - ^\.gitmodules

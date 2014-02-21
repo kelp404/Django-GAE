@@ -7,12 +7,27 @@
 
 ##Frameworks
 * [Django](https://github.com/django/django) 1.5
-* [Google App Engine Launcher](https://developers.google.com/appengine/) 1.8.3
+* [Google App Engine Launcher](https://developers.google.com/appengine/) 1.8.9
 * [AngularJS](http://angularjs.org/) 1.2
 * [jQuery](http://jquery.com/)
 * [Bootstrap](http://getbootstrap.com/) 3.1
-* [CoffeeScript](http://coffeescript.org) 1.7.1
+* [CoffeeScript](http://coffeescript.org) 1.7
 * [Compass](https://github.com/chriseppstein/compass)
+
+
+
+##Unit tests
+####CoffeeScript
+>
+```bash
+$ grunt test
+```
+
+####Python
+>
+```bash
+$ python tests.py
+```
 
 
 
