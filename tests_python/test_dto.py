@@ -1,11 +1,11 @@
 import unittest
-from mock import MagicMock
+from mock import MagicMock, patch
 from application.models.datastore.user_model import UserModel as User
 from application.models.dto.page_list import *
 from application.models.dto.user_model import *
 
 
-class PageListTest(unittest.TestCase):
+class TestPageList(unittest.TestCase):
     def test_page_list_default(self):
         page_list = PageList()
         self.assertEqual(page_list.index, 0)
@@ -55,18 +55,25 @@ class PageListTest(unittest.TestCase):
             ]
         })
 
-class UserPermissionTest(unittest.TestCase):
+class TestUserPermission(unittest.TestCase):
     def test_user_permission(self):
         self.assertEqual(UserPermission.anonymous, 0)
         self.assertEqual(UserPermission.root, 1)
         self.assertEqual(UserPermission.normal, 2)
 
-class UserModelTest(unittest.TestCase):
+class TestUserModel(unittest.TestCase):
     def setUp(self):
         # mock google.appengine.api.users
-        from google.appengine.api import users
-        users.create_login_url = MagicMock(return_value='login_url')
-        users.create_logout_url = MagicMock(return_value='logout_url')
+        self.patchers = [
+            patch('google.appengine.api.users.create_login_url', new=MagicMock(return_value='login_url')),
+            patch('google.appengine.api.users.create_logout_url', new=MagicMock(return_value='logout_url')),
+        ]
+        for patcher in self.patchers:
+            patcher.start()
+
+    def tearDown(self):
+        for patcher in self.patchers:
+            patcher.stop()
 
     def test_user_model_default(self):
         model = UserModel()

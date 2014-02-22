@@ -13,6 +13,6 @@ class PostModel(db.Model):
             'id': self.key().id(),
             'title': self.title,
             'content': self.content,
-            'author': self.author.dict(),
+            'author': self.author.dict() if self.author is not None else None,
             'create_time': self.create_time.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
         }

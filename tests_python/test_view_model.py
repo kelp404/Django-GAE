@@ -2,7 +2,7 @@ import unittest
 from application.models.view_model.error_model import *
 
 
-class ErrorViewModelTest(unittest.TestCase):
+class TestErrorViewModel(unittest.TestCase):
     def setUp(self):
         self.model = ErrorViewModel()
 
