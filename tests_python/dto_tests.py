@@ -1,8 +1,59 @@
 import unittest
 from mock import MagicMock
 from application.models.datastore.user_model import UserModel as User
+from application.models.dto.page_list import *
 from application.models.dto.user_model import *
 
+
+class PageListTest(unittest.TestCase):
+    def test_page_list_default(self):
+        page_list = PageList()
+        self.assertEqual(page_list.index, 0)
+        self.assertEqual(page_list.size, 20)
+        self.assertEqual(page_list.total, 0)
+
+    def test_page_list_with_data(self):
+        page_list = PageList(0, 10, 2, ['a', 'b'])
+        self.assertListEqual(page_list, ['a', 'b'])
+
+    def test_page_list_has_next_page(self):
+        self.assertFalse(PageList().has_next_page)
+        self.assertFalse(PageList(0, 20, 20).has_next_page)
+        self.assertTrue(PageList(0, 20, 21).has_next_page)
+
+    def test_page_list_has_previous_page(self):
+        self.assertFalse(PageList().has_previous_page)
+        self.assertTrue(PageList(1, 10, 11).has_previous_page)
+
+    def test_page_list_max_index(self):
+        self.assertEqual(PageList().max_index, -1)
+        self.assertEqual(PageList(0, 10, 1).max_index, 0)
+        self.assertEqual(PageList(0, 10, 11).max_index, 1)
+        self.assertEqual(PageList(0, 10, 20).max_index, 1)
+
+    def test_page_list_dict(self):
+        class cls(object):
+            def __init__(self, name):
+                self.name = name
+            def dict(self):
+                return self.__dict__
+        page_list = PageList(0, 10, 2, [cls('a'), cls('b')])
+        self.assertDictEqual(page_list.dict(), {
+            'index': 0,
+            'size': 10,
+            'total': 2,
+            'has_next_page': False,
+            'has_previous_page': False,
+            'max_index': 0,
+            'items': [
+                {
+                    'name': 'a'
+                },
+                {
+                    'name': 'b'
+                }
+            ]
+        })
 
 class UserPermissionTest(unittest.TestCase):
     def test_user_permission(self):
