@@ -10,6 +10,8 @@ module.exports = (config) ->
             'tests_coffee/lib/angularjs/angular.1.2.13.min.js'
             'tests_coffee/lib/angularjs/angular-mocks.1.2.13.js'
             'tests_coffee/lib/jquery/jquery-2.1.0.min.js'
+            'tests_coffee/lib/ui-router/release/angular-ui-router.min.js'
+            'tests_coffee/lib/angular-validator/dist/angular-validator.min.js'
             'application/static/javascript/site.js'
             'tests_coffee/specs/*.coffee'
         ]
