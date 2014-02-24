@@ -1,7 +1,6 @@
 import unittest
 from datetime import datetime
 from mock import MagicMock, patch
-from google.appengine.ext import db
 from application.models.datastore.post_model import *
 
 class TestPostModel(unittest.TestCase):
