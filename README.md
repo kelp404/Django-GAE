@@ -1,5 +1,6 @@
 #Django on Google App Engine
-[![Build Status](https://secure.travis-ci.org/kelp404/Django-GAE.png?branch=master)](http://travis-ci.org/kelp404/Django-GAE) [![devDependency Status](https://david-dm.org/kelp404/Django-GAE/dev-status.png?branch=master)](https://david-dm.org/kelp404/Django-GAE#info=devDependencies)
+[![Build Status](https://secure.travis-ci.org/kelp404/Django-GAE.png?branch=master)](http://travis-ci.org/kelp404/Django-GAE)
+[![devDependency Status](https://david-dm.org/kelp404/Django-GAE/dev-status.png?branch=master)](https://david-dm.org/kelp404/Django-GAE#info=devDependencies)
 
 [MIT License](http://www.opensource.org/licenses/mit-license.php)
 

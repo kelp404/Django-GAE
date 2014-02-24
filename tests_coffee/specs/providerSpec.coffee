@@ -38,14 +38,36 @@ describe 'app.provider', ->
             expect($app.user).toBe window.user
 
 
+    describe '$app.modal.post', ->
+        it '$app.modal.post.showCreate() will call $rootScope.$broadcast().', inject ($injector) ->
+            $rootScope = $injector.get '$rootScope'
+            $app = $injector.get '$app'
+
+            showCreateModel = 'modal'
+            spyOn $rootScope, '$broadcast'
+            .andCallFake (channel, model) ->
+                expect(channel).toEqual $app.broadcastChannel.showCreatePost
+                expect(model).toBe showCreateModel
+            $app.modal.post.showCreate showCreateModel
+
+        it '$app.modal.post.hideCreate() will call $rootScope.$broadcast().', inject ($injector) ->
+            $rootScope = $injector.get '$rootScope'
+            $app = $injector.get '$app'
+
+            spyOn $rootScope, '$broadcast'
+            .andCallFake (channel) ->
+                expect(channel).toEqual $app.broadcastChannel.hideCreatePost
+            $app.modal.post.hideCreate()
+
+
     describe '$app.modal.loginRequired', ->
         it '$app.modal.loginRequired.show() will call $rootScope.$broadcast().', inject ($injector) ->
             $rootScope = $injector.get '$rootScope'
             $app = $injector.get '$app'
 
             spyOn $rootScope, '$broadcast'
-            .andCallFake (modal) ->
-                expect(modal).toEqual $app.broadcastChannel.showLoginRequired
+            .andCallFake (channel) ->
+                expect(channel).toEqual $app.broadcastChannel.showLoginRequired
             $app.modal.loginRequired.show()
             expect($rootScope.$broadcast).toHaveBeenCalled()
 
