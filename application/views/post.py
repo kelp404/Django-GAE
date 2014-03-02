@@ -11,7 +11,6 @@ def get_posts(request):
     Get posts.
     :param request.GET:
         index: The page index.
-        size: The page size.
     :return: JsonResponse([PostModel])
     """
     model = request.GET.dict()
