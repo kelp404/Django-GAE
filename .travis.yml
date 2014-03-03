@@ -15,9 +15,10 @@ install:
   - pip install -q Django==1.5 --use-mirrors
   # mock
   - pip install -U mock
-  # npm
+  # node modules
   - npm install -g grunt-cli
   - npm install -g bower
+  - npm install
   # bower componetns
   - bower install
 
@@ -25,7 +26,6 @@ before_script:
   - node -v
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - npm install
 
 script:
   - python test.py

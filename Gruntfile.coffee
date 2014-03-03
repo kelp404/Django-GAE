@@ -1,6 +1,6 @@
 module.exports = (grunt) ->
     # -----------------------------------
-    # Options
+    # options
     # -----------------------------------
     grunt.config.init
         compass:
@@ -38,7 +38,7 @@ module.exports = (grunt) ->
     grunt.registerTask 'test', ['karma']
 
     # -----------------------------------
-    # Plugins
+    # tasks
     # -----------------------------------
     grunt.loadNpmTasks 'grunt-contrib-compass'
     grunt.loadNpmTasks 'grunt-contrib-coffee'
