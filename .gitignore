@@ -7,8 +7,11 @@
 # node modules
 node_modules
 
+# bower components
+bower_components
+
 # osx noise
 .DS_Store
 
-#compass
+# compass
 .sass-cache

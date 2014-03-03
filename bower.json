@@ -1,0 +1,27 @@
+{
+  "name": "Django-GAE",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kelp404/Django-GAE",
+  "authors": [
+    "Kelp <kelp@phate.org>"
+  ],
+  "description": "The Django site on Google App Engine.",
+  "keywords": [
+    "Django",
+    "Google App Engine"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.14",
+    "angular-mocks": "~1.2.14",
+    "jquery": "2.1"
+  }
+}
