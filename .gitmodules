@@ -14,3 +14,6 @@
 	path = submodules/angular-validator
 	url = https://github.com/kelp404/angular-validator.git
 	ignore = dirty
+[submodule "submodules/django"]
+	path = submodules/django
+	url = https://github.com/django/django.git

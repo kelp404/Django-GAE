@@ -50,8 +50,3 @@ handlers:
 
 - url: .*
   script: application.app
-
-
-libraries:
-- name: django
-  version: "1.5"
