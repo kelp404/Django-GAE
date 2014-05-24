@@ -16,6 +16,9 @@ module.exports = (config) ->
             'tests_coffee/specs/*.coffee'
         ]
 
+        preprocessors:
+            '**/*.coffee': 'coffee'
+
         # list of files to exclude
         exclude: []
 
