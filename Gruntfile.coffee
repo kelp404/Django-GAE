@@ -34,7 +34,11 @@ module.exports = (grunt) ->
     # -----------------------------------
     # register task
     # -----------------------------------
-    grunt.registerTask 'dev', ['watch']
+    grunt.registerTask 'dev', [
+        'compass'
+        'coffee'
+        'watch'
+    ]
     grunt.registerTask 'test', ['karma']
 
     # -----------------------------------
