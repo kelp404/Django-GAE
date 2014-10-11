@@ -1,19 +1,3 @@
-[submodule "submodules/ui-router"]
-	path = submodules/ui-router
-	url = https://github.com/angular-ui/ui-router.git
-	ignore = dirty
-[submodule "submodules/nprogress"]
-	path = submodules/nprogress
-	url = https://github.com/rstacruz/nprogress.git
-	ignore = dirty
-[submodule "submodules/AlertView"]
-	path = submodules/AlertView
-	url = https://github.com/kelp404/AlertView.git
-	ignore = dirty
-[submodule "submodules/angular-validator"]
-	path = submodules/angular-validator
-	url = https://github.com/kelp404/angular-validator.git
-	ignore = dirty
 [submodule "submodules/django"]
 	path = submodules/django
 	url = https://github.com/django/django.git

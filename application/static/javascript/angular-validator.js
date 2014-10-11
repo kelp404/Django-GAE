@@ -1,1 +1,1 @@
-../../../submodules/angular-validator/dist/angular-validator.js
+../../../bower_components/angular-validator/dist/angular-validator.js

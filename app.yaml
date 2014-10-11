@@ -13,11 +13,9 @@ skip_files:
 - ^(.*/)?tests/.*
 - ^(.*/)?tests_coffee/.*
 - ^(.*/)?tests_python/.*
+- ^bower_components/.*
 - ^test\.py
 - ^README\.md
-- ^\.gitignore
-- ^\.gitmodules
-- ^\.git/.*
 - ^package\.json
 - ^\node_modules/.*
 - ^\.idea/.*

@@ -1,1 +1,1 @@
-../../../submodules/nprogress/nprogress.js
+../../../bower_components/nprogress/nprogress.js
