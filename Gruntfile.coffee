@@ -6,9 +6,10 @@ module.exports = (grunt) ->
         compass:
             source:
                 options:
-                    sassDir: './application/static/scss'
-                    cssDir: './application/static/css'
+                    sassDir: 'application/static/scss'
+                    cssDir: 'application/static/css'
                     outputStyle: 'compressed'
+                    config: 'application/static/scss/config.rb'
 
         coffee:
             source:
