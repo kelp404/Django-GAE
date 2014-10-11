@@ -8,11 +8,11 @@
 
 ##Frameworks
 * [Django](https://github.com/django/django) 1.5
-* [Google App Engine Launcher](https://developers.google.com/appengine/) 1.8.9
+* [Google App Engine Launcher](https://developers.google.com/appengine/) 1.9.13
 * [AngularJS](http://angularjs.org/) 1.2
 * [jQuery](http://jquery.com/)
-* [Bootstrap](http://getbootstrap.com/) 3.1
-* [CoffeeScript](http://coffeescript.org) 1.7
+* [Bootstrap](http://getbootstrap.com/) 3.2
+* [CoffeeScript](http://coffeescript.org) 1.8
 * [Compass](https://github.com/chriseppstein/compass)
 
 

@@ -13,11 +13,12 @@ skip_files:
 - ^(.*/)?tests/.*
 - ^(.*/)?tests_coffee/.*
 - ^(.*/)?tests_python/.*
-- ^bower_components/.*
 - ^test\.py
 - ^README\.md
+- ^bower_components/.*
 - ^package\.json
-- ^\node_modules/.*
+- ^node_modules/.*
+- ^submodules/.*
 - ^\.idea/.*
 - ^_images/.*
 - ^(.*/)?.*\.coffee
