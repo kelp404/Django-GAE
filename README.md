@@ -7,7 +7,7 @@
 
 
 ##Frameworks
-* [Django](https://github.com/django/django) 1.5
+* [Django](https://github.com/django/django) 1.7
 * [Google App Engine Launcher](https://developers.google.com/appengine/) 1.9.13
 * [AngularJS](http://angularjs.org/) 1.2
 * [jQuery](http://jquery.com/)
